@@ -1,5 +1,6 @@
 package com.mackanic.healthcaremanager.Patient;
 
+import com.mackanic.healthcaremanager.Appointment.Appointment;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -7,6 +8,7 @@ import java.util.Date;
 import java.util.List;
 
 import com.mackanic.healthcaremanager.Provider.Provider;
+import com.mackanic.healthcaremanager.Prescription.Prescription;
 
 
 @Entity
