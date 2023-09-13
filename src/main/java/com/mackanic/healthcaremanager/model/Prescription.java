@@ -1,7 +1,5 @@
-package com.mackanic.healthcaremanager.Prescription;
+package com.mackanic.healthcaremanager.model;
 
-import com.mackanic.healthcaremanager.Patient.Patient;
-import com.mackanic.healthcaremanager.Provider.Provider;
 import jakarta.persistence.*;
 import lombok.Data;
 

@@ -1,14 +1,10 @@
-package com.mackanic.healthcaremanager.Patient;
+package com.mackanic.healthcaremanager.model;
 
-import com.mackanic.healthcaremanager.Appointment.Appointment;
 import jakarta.persistence.*;
 import lombok.Data;
 
 import java.util.Date;
 import java.util.List;
-
-import com.mackanic.healthcaremanager.Provider.Provider;
-import com.mackanic.healthcaremanager.Prescription.Prescription;
 
 
 @Entity
@@ -24,6 +20,7 @@ public class Patient {
     private Double weight;
     private Double height;
     private String email;
+    private String password;
     private String phone;
     private String bloodType;
     private String address;
