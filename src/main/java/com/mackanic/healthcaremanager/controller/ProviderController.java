@@ -3,6 +3,7 @@ package com.mackanic.healthcaremanager.controller;
 import com.mackanic.healthcaremanager.model.Appointment;
 import com.mackanic.healthcaremanager.model.Patient;
 import com.mackanic.healthcaremanager.model.Provider;
+import com.mackanic.healthcaremanager.service.ProviderService;
 import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfigureOrder;
@@ -22,11 +23,6 @@ public class ProviderController {
     @PostMapping("register")
     public ResponseEntity<String> addProvider(@RequestBody Provider provider) {
         return providerService.addProvider(provider);
-    }
-
-    @PostMapping("signIn")
-    public ResponseEntity<String> signIn(@RequestBody String email, @RequestBody String password) {
-        return providerService.signIn(email, password);
     }
 
     @GetMapping("viewPatient/{userId}")

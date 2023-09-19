@@ -19,7 +19,7 @@ public class PatientController {
     @GetMapping("appointments/{patientId}")
     public ResponseEntity<List<Appointment>> getAllAppointments(@RequestBody Long patientId) {
 
-        return patientService.addPatient(patientId);
+        return patientService.getAllAppointments(patientId);
     }
 
     @GetMapping("prescriptions/{patientId}")
