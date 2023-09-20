@@ -16,7 +16,6 @@ import java.util.List;
 @RequestMapping("provider")
 public class ProviderController {
 
-
     @Autowired
     ProviderService providerService;
 
@@ -46,36 +45,10 @@ public class ProviderController {
         return providerService.getAllPatients();
     }
 
-    @PostMapping("appointment/register")
-    public ResponseEntity<String> bookAppointment(@RequestBody Appointment appointment) {
-        return providerService.bookAppointment(appointment);
+    @GetMapping("viewPatients/{providerId}")
+    public ResponseEntity<List<Patient>> getPatientsByProviderId(@PathVariable Long providerId) {
+
+        return providerService.getPatientsByProviderId(providerId);
     }
-
-    @GetMapping("appointment/list")
-    public ResponseEntity<List<Appointment>> showAllAppointments() {
-        return providerService.showAllAppointments();
-    }
-
-    @GetMapping("appointment/show/{appointmentId")
-    public ResponseEntity<Appointment> showAppointment(@PathVariable Long appointmentId) {
-        return providerService.showAppointment(appointmentId);
-    }
-
-    @GetMapping("appointment/list/{patientId}")
-    public ResponseEntity<List<Appointment>> showPatientAppointments(@PathVariable Long patientId) {
-        return providerService.showPatientAppointments(patientId);
-    }
-
-
-    @DeleteMapping("appointment/delete/{appointmentId")
-    public ResponseEntity<String> deleteAppointment(@PathVariable Long appointmentId) {
-        return providerService.deleteAppointment(appointmentId);
-    }
-
-
-
-
-
-
 
 }
