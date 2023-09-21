@@ -50,10 +50,12 @@ public class ProviderService {
 
     }
 
-    public ResponseEntity<String> addPatient(Patient patient) {
+    public ResponseEntity<String> addPatient(Long providerId, Patient patient) {
 
         try {
             patientRepository.save(patient);
+            Provider provider = providerRepository.getReferenceById(providerId);
+            provider.addPatient(patient);
             return new ResponseEntity<>("Successfully added patient.", HttpStatus.CREATED);
         } catch (Exception e) {
             e.printStackTrace();

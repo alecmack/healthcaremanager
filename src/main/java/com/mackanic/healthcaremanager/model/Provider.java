@@ -24,9 +24,14 @@ public class Provider {
 
 
     @ManyToMany
+
     private List<Patient> patients;
 
     @OneToMany
     private List<Appointment> appointments;
+
+    public void addPatient(Patient patient) {
+        patients.add(patient);
+    }
 
 }

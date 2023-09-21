@@ -2,6 +2,8 @@ package com.mackanic.healthcaremanager.service;
 
 import com.mackanic.healthcaremanager.model.Appointment;
 import com.mackanic.healthcaremanager.repository.AppointmentRepository;
+import com.mackanic.healthcaremanager.repository.PatientRepository;
+import com.mackanic.healthcaremanager.repository.ProviderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,10 +18,18 @@ public class AppointmentService {
     @Autowired
     AppointmentRepository appointmentRepository;
 
-    public ResponseEntity<String> bookAppointment(Appointment appointment) {
+    @Autowired
+    PatientRepository patientRepository;
+
+    @Autowired
+    ProviderRepository providerRepository;
+
+    public ResponseEntity<String> bookAppointment(Long patientId, Long providerId, Appointment appointment) {
 
         try {
             appointmentRepository.save(appointment);
+            appointment.setPatient(patientRepository.getReferenceById(patientId));
+            appointment.setProvider(providerRepository.getReferenceById(providerId));
             return new ResponseEntity<>("Successfully booked appointment.", HttpStatus.CREATED);
         } catch (Exception e) {
             e.printStackTrace();

@@ -1,12 +1,9 @@
 package com.mackanic.healthcaremanager.controller;
 
-import com.mackanic.healthcaremanager.model.Appointment;
 import com.mackanic.healthcaremanager.model.Patient;
 import com.mackanic.healthcaremanager.model.Provider;
 import com.mackanic.healthcaremanager.service.ProviderService;
-import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.AutoConfigureOrder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,9 +27,9 @@ public class ProviderController {
 
     }
 
-    @PostMapping("registerPatient")
-    public ResponseEntity<String> addPatient(@RequestBody Patient patient) {
-        return providerService.addPatient(patient);
+    @PostMapping("registerPatient/{providerId}")
+    public ResponseEntity<String> addPatient(@PathVariable Long providerId, @RequestBody Patient patient) {
+        return providerService.addPatient(providerId, patient);
     }
 
     @DeleteMapping("deletePatient/{patientId}")

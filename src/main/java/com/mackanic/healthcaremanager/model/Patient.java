@@ -37,6 +37,10 @@ public class Patient {
     @OneToMany
     private List<Appointment> appointments;
 
+    public void addProvider(Provider provider) {
+        providers.add(provider);
+    }
+
 
 
 

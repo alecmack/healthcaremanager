@@ -15,9 +15,9 @@ public class AppointmentController {
     @Autowired
     AppointmentService appointmentService;
 
-    @PostMapping("register")
-    public ResponseEntity<String> bookAppointment(@RequestBody Appointment appointment) {
-        return appointmentService.bookAppointment(appointment);
+    @PostMapping("register/{patientId}/{providerId}")
+    public ResponseEntity<String> bookAppointment(@PathVariable Long patientId, @PathVariable Long providerId, @RequestBody Appointment appointment) {
+        return appointmentService.bookAppointment(patientId, providerId, appointment);
     }
 
     @GetMapping("list")
