@@ -16,9 +16,19 @@ public class ProviderController {
     @Autowired
     ProviderService providerService;
 
+    @GetMapping("viewAllProviders")
+    public ResponseEntity<List<Provider>> getAllProviders() {
+        return providerService.getAllProviders();
+    }
+
     @PostMapping("register")
     public ResponseEntity<String> addProvider(@RequestBody Provider provider) {
         return providerService.addProvider(provider);
+    }
+
+    @DeleteMapping("deleteProvider/{providerId}")
+    public ResponseEntity<String> deleteProvider(@PathVariable Long providerId) {
+        return providerService.deleteProvider(providerId);
     }
 
     @GetMapping("viewPatient/{userId}")
@@ -46,6 +56,13 @@ public class ProviderController {
     public ResponseEntity<List<Patient>> getPatientsByProviderId(@PathVariable Long providerId) {
 
         return providerService.getPatientsByProviderId(providerId);
+    }
+
+    @PutMapping("addProviderToPatient/{providerId}/{patientId}")
+    public ResponseEntity<String> addProviderToPatient(@PathVariable Long providerId, @PathVariable Long patientId) {
+
+        return providerService.addProviderToPatient(providerId, patientId);
+
     }
 
 }

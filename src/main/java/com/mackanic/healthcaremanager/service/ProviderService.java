@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 
@@ -50,12 +52,16 @@ public class ProviderService {
 
     }
 
+    @Transactional
     public ResponseEntity<String> addPatient(Long providerId, Patient patient) {
 
         try {
             patientRepository.save(patient);
-            Provider provider = providerRepository.getReferenceById(providerId);
+
+            Provider provider = providerRepository.findById(providerId).orElseThrow(() -> new IllegalStateException("Provider with id " + providerId + " does not exist"));
+
             provider.addPatient(patient);
+
             return new ResponseEntity<>("Successfully added patient.", HttpStatus.CREATED);
         } catch (Exception e) {
             e.printStackTrace();
@@ -97,5 +103,38 @@ public class ProviderService {
 
     }
 
+@Transactional
+    public ResponseEntity<String> addProviderToPatient(Long providerId, Long patientId) {
+        try {
+            Provider provider = providerRepository.findById(providerId).orElseThrow(() -> new IllegalStateException("Provider with id " + providerId + " does not exist"));
+            Patient patient = patientRepository.findById(patientId).orElseThrow(() -> new IllegalStateException("Patient with id " + patientId + " does not exist"));
 
+            provider.addPatient(patient);
+
+
+            return new ResponseEntity<>("Provider added to patient.", HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return new ResponseEntity<>("Provider was not added to patient list. Please try again.", HttpStatus.BAD_REQUEST);
+    }
+
+
+    public ResponseEntity<List<Provider>> getAllProviders() {
+        return new ResponseEntity<>(providerRepository.findAll(), HttpStatus.OK);
+    }
+
+    public ResponseEntity<String> deleteProvider(Long providerId) {
+
+        boolean exists = providerRepository.existsById(providerId);
+
+        if(!exists) {
+            throw new IllegalStateException("Patient with id " + providerId + " does not exists.");
+        }
+        providerRepository.deleteById(providerId);
+
+        return new ResponseEntity<>("Patient " + providerId + " successfully deleted.", HttpStatus.OK);
+
+    }
 }

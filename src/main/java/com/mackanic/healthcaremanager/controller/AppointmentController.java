@@ -30,7 +30,7 @@ public class AppointmentController {
         return appointmentService.showAppointment(appointmentId);
     }
 
-    @GetMapping("list/{patientId}")
+    @GetMapping("list/patient/{patientId}")
     public ResponseEntity<List<Appointment>> showPatientAppointments(@PathVariable Long patientId) {
         return appointmentService.showPatientAppointments(patientId);
     }

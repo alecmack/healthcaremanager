@@ -28,8 +28,8 @@ public class AppointmentService {
 
         try {
             appointmentRepository.save(appointment);
-            appointment.setPatient(patientRepository.getReferenceById(patientId));
-            appointment.setProvider(providerRepository.getReferenceById(providerId));
+            appointment.setPatient(patientRepository.findById(patientId).get());
+            appointment.setProvider(providerRepository.findById(providerId).get());
             return new ResponseEntity<>("Successfully booked appointment.", HttpStatus.CREATED);
         } catch (Exception e) {
             e.printStackTrace();

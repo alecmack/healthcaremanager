@@ -1,10 +1,10 @@
 package com.mackanic.healthcaremanager.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 
 @Entity
@@ -28,8 +28,9 @@ public class Patient {
     private String insuranceNumber;
 
 
-    @ManyToMany
-    private List<Provider> providers;
+    @JsonIgnore
+    @ManyToMany(mappedBy = "patients")
+    private Set<Provider> providers;
 
     @OneToMany
     private List<Prescription> prescriptions;
